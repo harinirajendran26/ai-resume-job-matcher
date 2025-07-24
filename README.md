@@ -41,6 +41,18 @@ Visuals
 > 📈 Heatmap: How well each resume matches each job  
 > 📊 Bar chart: Best-fit job for every candidate  
 > 📉 List of missing skills for every mismatch
+> ### 📷 Sample Output
+
+Resume–Job Match Heatmap
+<img src="match_heatmap.png" width="600"/>
+
+> Shows how well each resume matches each job based on NLP-extracted skills.
+
+Best Job Match Per Resume
+<img src="top_matches_bar.png" width="600"/>
+
+> Highlights the top job match for each resume and shows match score percentages.
+
 
 ---
 
