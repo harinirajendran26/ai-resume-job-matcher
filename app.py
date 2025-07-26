@@ -1,14 +1,22 @@
 import streamlit as st
 import fitz  # PyMuPDF
-import spacy
 import pandas as pd
 import matplotlib.pyplot as plt
 from fpdf import FPDF
 import base64
 import unicodedata
 
-# Load spaCy model
-nlp = spacy.load("en_core_web_sm")
+import spacy
+import subprocess
+import importlib.util
+
+# Check if the model is installed, if not download it
+model_name = "en_core_web_sm"
+if importlib.util.find_spec(model_name) is None:
+    subprocess.run(["python", "-m", "spacy", "download", model_name])
+
+nlp = spacy.load(model_name)
+
 
 # --------------------------
 # Ideal Skills Dictionary
