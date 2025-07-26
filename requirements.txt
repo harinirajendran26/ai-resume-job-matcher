@@ -4,3 +4,4 @@ spacy
 matplotlib
 fpdf
 PyMuPDF
+PyPDF2
