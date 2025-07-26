@@ -1,6 +1,6 @@
 streamlit
 pandas
-numpy
+numpy==1.24.4
 matplotlib
 PyPDF2
 spacy==3.7.3
