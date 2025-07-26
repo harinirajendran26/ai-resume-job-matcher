@@ -1,69 +1,84 @@
-AI Resume–Job Matcher
+AI Resume–Career Matcher
 
-This project was born from a question I kept asking myself:
+A smart AI-powered web app that analyzes your resume, matches it to your ideal career path, and gives you a personalized report — all in seconds.
 
-> _"If companies can use AI to screen resumes… why can’t candidates use AI to find their best-fit job and understand where they fall short?"_
-
-So I built it.
-
-A real-world, AI-powered system that:
-- Reads unstructured resumes and job descriptions
-- Extracts key skills using Natural Language Processing (NLP)
-- Calculates a **match score** between every resume and job
-- Shows **which job is the best fit**
-- AND tells the candidate what skills they’re **missing**
+🔗 **Live Demo** → [Click here to try it on Streamlit](https://harinirajendran26-ai-resume-job-matcher.streamlit.app/)
 
 ---
 
-What It Does
+Key Features
 
-- ✅ Extracts skills from resumes and job descriptions using spaCy (NLP)
-- 🧠 Calculates resume–job match scores using custom logic
-- 📊 Visualizes all scores in heatmaps and bar charts
-- 🚨 Identifies missing skills for each resume–job pair
-- 💾 Exports recommendations for recruiters or career advisors
-
----
-
-Files in this Project
-
-| File | Purpose |
-|------|---------|
-| `AI_RESUME_JOBMATCHER.ipynb` | Complete logic and visualization |
-| `resumes.csv` | 3 candidate resumes (realistic) |
-| `job_description.csv` | 3 job listings (DA, ML Eng, DS) |
-| `best_job_matches.csv` | Final recommendation output |
+✅ Upload your **resume as PDF**  
+✅ Choose from **multiple career roles** (tech + non-tech)  
+✅ Extract your skills using **spaCy NLP**  
+✅ View your **match score**, matched and missing skills  
+✅ See how you match with **all other career roles**  
+✅ Download a personalized **PDF report**  
+✅ **No login, no signup — just works!**
 
 ---
 
-Visuals
+Demo Screenshots
 
-> 📈 Heatmap: How well each resume matches each job  
-> 📊 Bar chart: Best-fit job for every candidate  
-> 📉 List of missing skills for every mismatch
-> ### 📷 Sample Output
+### 🔘 Upload Resume & Choose Role
+![Upload Resume](https://github.com/harinirajendran26/ai-resume-job-matcher/blob/main/screenshots/upload_and_select.png)
 
-Resume–Job Match Heatmap
-<img src="match_heatmap.png" width="600"/>
+### 🎯 Match Result with Skill Analysis
+![Match Score](https://github.com/harinirajendran26/ai-resume-job-matcher/blob/main/screenshots/match_results.png)
 
-> Shows how well each resume matches each job based on NLP-extracted skills.
+### 📈 Career Match Bar Chart
+![Bar Chart](https://github.com/harinirajendran26/ai-resume-job-matcher/blob/main/screenshots/bar_chart.png)
 
-Best Job Match Per Resume
-<img src="top_matches_bar.png" width="600"/>
+### 📥 Download Personalized PDF Report
+![PDF Report](https://github.com/harinirajendran26/ai-resume-job-matcher/blob/main/screenshots/pdf_report_button.png)
 
-> Highlights the top job match for each resume and shows match score percentages.
+---
 
+How It Works
+
+1. Resume is parsed using `PyPDF2`
+2. Skills are extracted with `spaCy` NLP engine
+3. Compared against curated skillsets for each career
+4. Displays match % + missing skills + suggestions
+5. Offers a PDF report of your results
+
+---
+
+Career Roles Supported
+
+Includes both technical and non-technical roles:
+
+- Data Analyst  
+- Data Scientist  
+- Machine Learning Engineer  
+- Software Engineer  
+- Product Manager  
+- UI/UX Designer  
+- HR Manager  
+- Business Analyst  
+- Marketing Analyst  
 
 ---
 
 Tech Stack
 
 - Python
-- spaCy NLP (`en_core_web_sm`)
-- pandas, seaborn, matplotlib
-- Jupyter Notebook
+- Streamlit (frontend)
+- spaCy (skill extraction)
+- PyPDF2 (PDF reader)
+- Matplotlib (visualizations)
+- FPDF (report generation)
 
 ---
+
+💻 Run It Locally
+
+```bash
+git clone https://github.com/harinirajendran26/ai-resume-job-matcher.git
+cd ai-resume-job-matcher
+pip install -r requirements.txt
+streamlit run app.py
+----
 
 What I Learned
 
