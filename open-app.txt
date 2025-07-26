@@ -1,0 +1,2 @@
+cd Desktop/jupyter/Projects/AI_RESUMEMATCHER
+python -m streamlit run app.py
