@@ -1,7 +1,8 @@
-streamlit
-pandas
+streamlit==1.33.0
+pandas==1.5.3
 numpy==1.24.4
-matplotlib
-PyPDF2
+matplotlib==3.7.1
+PyPDF2==3.0.1
 spacy==3.7.3
+fpdf==1.7.2
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
