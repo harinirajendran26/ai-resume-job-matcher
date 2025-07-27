@@ -15,17 +15,11 @@ if importlib.util.find_spec(model_name) is None:
 nlp = spacy.load(model_name)
 
 # 2. 📂 Ideal skills for career roles
-career_skills = {
-    "Data Analyst": {"python", "sql", "excel", "power bi", "tableau", "statistics"},
-    "Machine Learning Engineer": {"python", "scikit-learn", "tensorflow", "pandas", "numpy", "algorithms"},
-    "Data Scientist": {"python", "machine learning", "deep learning", "statistics", "sql", "data visualization"},
-    "Software Engineer": {"python", "java", "c++", "data structures", "algorithms", "git"},
-    "Product Manager": {"agile", "scrum", "communication", "roadmap", "analytics", "prioritization"},
-    "UI/UX Designer": {"figma", "wireframes", "adobe xd", "user research", "design systems"},
-    "HR Manager": {"recruitment", "onboarding", "conflict resolution", "employee relations", "payroll"},
-    "Marketing Analyst": {"seo", "google analytics", "campaigns", "branding", "market research"},
-    "Business Analyst": {"excel", "data analysis", "sql", "stakeholder management", "reporting"},
-}
+import json
+
+with open("career_roles.json", "r") as f:
+    career_skills = json.load(f)
+
 
 # 3. 📄 Resume PDF to text
 def extract_text_from_pdf(pdf_file):
