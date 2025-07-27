@@ -32,7 +32,26 @@ def extract_text_from_pdf(pdf_file):
 # 4. 🧠 Extract skills using spaCy
 def extract_skills(text):
     doc = nlp(text.lower())
-    return list(set([token.text for token in doc if token.pos_ in ["NOUN", "PROPN"]]))
+    
+    # Load known skills from JSON
+    with open("known_skills.json", "r") as f:
+        known_skills = set(json.load(f))
+
+    extracted = set()
+
+    # From noun chunks (e.g., "data analysis", "machine learning")
+    for chunk in doc.noun_chunks:
+        phrase = chunk.text.strip().lower()
+        if phrase in known_skills:
+            extracted.add(phrase)
+
+    # From named entities (e.g., "Power BI", "Google Analytics")
+    for ent in doc.ents:
+        word = ent.text.strip().lower()
+        if word in known_skills:
+            extracted.add(word)
+
+    return list(extracted)
 
 # 5. 🧾 Generate PDF report
 def generate_pdf_report(name, top_roles, selected_career, selected_score, matched, missing):
