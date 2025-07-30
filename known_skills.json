@@ -1,9 +1,103 @@
-[
-  "python", "java", "c++", "sql", "excel", "power bi", "tableau", "numpy",
-  "pandas", "matplotlib", "tensorflow", "keras", "scikit-learn", "deep learning",
-  "machine learning", "data analysis", "data visualization", "git", "agile",
-  "scrum", "communication", "roadmap", "branding", "seo", "google analytics",
-  "user research", "figma", "wireframes", "adobe xd", "employee relations",
-  "conflict resolution", "payroll", "hiring", "statistics", "algorithms",
-  "campaigns", "market research", "stakeholder management", "reporting"
-]
+{
+  "Data Scientist": [
+    "python",
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "seaborn",
+    "machine learning",
+    "scikit-learn",
+    "tensorflow",
+    "keras",
+    "statistics",
+    "data analysis"
+  ],
+  "Frontend Developer": [
+    "html",
+    "css",
+    "javascript",
+    "react",
+    "bootstrap",
+    "responsive design",
+    "version control",
+    "git"
+  ],
+  "Backend Developer": [
+    "python",
+    "django",
+    "flask",
+    "sql",
+    "mongodb",
+    "api development",
+    "authentication",
+    "rest"
+  ],
+  "Full Stack Developer": [
+    "html",
+    "css",
+    "javascript",
+    "react",
+    "node.js",
+    "express",
+    "mongodb",
+    "api",
+    "git",
+    "github"
+  ],
+  "Machine Learning Engineer": [
+    "python",
+    "scikit-learn",
+    "tensorflow",
+    "keras",
+    "deep learning",
+    "data preprocessing",
+    "model evaluation",
+    "hyperparameter tuning"
+  ],
+  "Business Analyst": [
+    "excel",
+    "power bi",
+    "sql",
+    "tableau",
+    "data visualization",
+    "statistics",
+    "business strategy",
+    "communication"
+  ],
+  "Human Resources": [
+    "recruitment",
+    "employee engagement",
+    "hr policies",
+    "payroll",
+    "conflict resolution",
+    "interviewing",
+    "compliance"
+  ],
+  "Marketing Manager": [
+    "marketing strategy",
+    "seo",
+    "social media",
+    "google analytics",
+    "content creation",
+    "email marketing",
+    "branding"
+  ],
+  "Graphic Designer": [
+    "adobe photoshop",
+    "adobe illustrator",
+    "creativity",
+    "visual design",
+    "figma",
+    "branding",
+    "layout design"
+  ],
+  "Customer Support Executive": [
+    "communication",
+    "problem-solving",
+    "crm software",
+    "email support",
+    "chat support",
+    "product knowledge",
+    "empathy"
+  ]
+}
