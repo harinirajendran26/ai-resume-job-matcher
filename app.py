@@ -1,44 +1,39 @@
 import streamlit as st
+st.set_page_config(page_title="AI Resume–Job Matcher", layout="centered")
+
 import PyPDF2
 import spacy
 import json
-import base64
+from io import BytesIO
 from fpdf import FPDF
 import matplotlib.pyplot as plt
 
-# Load SpaCy model
-model_name = "en_core_web_sm"
-try:
-    nlp = spacy.load(model_name)
-except:
-    st.error(f"Failed to load SpaCy model '{model_name}'. Please install it via setup.")
-    st.stop()
+# Load spaCy model
+nlp = spacy.load("en_core_web_sm")
 
-# Load known career skills from JSON
-@st.cache_data
-def load_known_skills():
-    with open("known_skills.json", "r") as f:
-        return json.load(f)
+# Load known skills from a JSON file
+with open("career_roles.json", "r") as f:
+    career_skills = json.load(f)
 
-career_skills = load_known_skills()
-career_options = list(career_skills.keys())
+# Flatten all known skills into a set
+all_known_skills = set()
+for skills in career_skills.values():
+    all_known_skills.update([s.lower() for s in skills])
 
-# Extract text from uploaded PDF
+# Function to extract text from uploaded PDF
 def extract_text_from_pdf(pdf_file):
-    reader = PyPDF2.PdfReader(pdf_file)
+    pdf_reader = PyPDF2.PdfReader(pdf_file)
     text = ""
-    for page in reader.pages:
+    for page in pdf_reader.pages:
         text += page.extract_text()
     return text
 
-# Skill extraction using SpaCy
-def extract_skills(text):
-    doc = nlp(text.lower())
-    skills = set()
-    for token in doc:
-        if token.text in all_skills_set:
-            skills.add(token.text)
-    return list(skills)
+# Extract skills using NLP and keyword match
+def extract_skills_from_text(text):
+    doc = nlp(text)
+    tokens = [token.text.lower() for token in doc if not token.is_stop and not token.is_punct]
+    matched_skills = list(set(tokens) & all_known_skills)
+    return matched_skills
 
 # Generate downloadable PDF report
 def generate_pdf_report(name, top_roles, selected_role, selected_score, matched_skills, missing_skills):
@@ -46,88 +41,79 @@ def generate_pdf_report(name, top_roles, selected_role, selected_score, matched_
     pdf.add_page()
     pdf.set_font("Arial", size=12)
 
-    pdf.cell(200, 10, txt=f"Resume Analysis Report for {name}", ln=True, align="C")
+    pdf.cell(200, 10, txt=f"Resume Skill Match Report", ln=True, align='C')
     pdf.ln(10)
+    pdf.cell(200, 10, txt=f"Candidate: {name}", ln=True)
 
-    pdf.set_font("Arial", "B", size=12)
-    pdf.cell(200, 10, txt="Top Matching Roles:", ln=True)
-    pdf.set_font("Arial", size=12)
+    pdf.ln(5)
+    pdf.cell(200, 10, txt="Top Career Matches:", ln=True)
     for role, score in top_roles:
-        pdf.cell(200, 10, txt=f"{role}: {score}%", ln=True)
+        pdf.cell(200, 10, txt=f"{role} - {score}%", ln=True)
 
     pdf.ln(5)
-    pdf.set_font("Arial", "B", size=12)
-    pdf.cell(200, 10, txt=f"Selected Role Match - {selected_role}: {selected_score}%", ln=True)
+    pdf.cell(200, 10, txt=f"Selected Career Role: {selected_role} ({selected_score}%)", ln=True)
+
     pdf.ln(5)
+    pdf.multi_cell(0, 10, txt=f"Matched Skills: {', '.join(matched_skills) if matched_skills else 'None'}")
+    pdf.ln(5)
+    pdf.multi_cell(0, 10, txt=f"Missing Skills: {', '.join(missing_skills) if missing_skills else 'None'}")
 
-    pdf.set_font("Arial", "B", size=12)
-    pdf.cell(200, 10, txt="Matched Skills:", ln=True)
-    pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, txt=", ".join(matched_skills) if matched_skills else "None")
+    return pdf.output(dest='S').encode('latin1')
 
-    pdf.ln(3)
-    pdf.set_font("Arial", "B", size=12)
-    pdf.cell(200, 10, txt="Missing Skills:", ln=True)
-    pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, txt=", ".join(missing_skills) if missing_skills else "None")
 
-    return pdf.output(dest="S").encode("latin-1")
+# Streamlit app
+st.title("🧠 AI Resume–Job Matcher")
+st.write("Upload your resume (PDF), select your desired career, and find your match!")
 
-# UI starts here
-st.set_page_config(page_title="AI Resume–Job Matcher", layout="centered")
-st.title("🤖 AI Resume–Job Matcher")
-st.write("Upload your resume PDF and select your career goal to see how well your skills match!")
+name = st.text_input("Enter your name")
 
-uploaded_resume = st.file_uploader("📄 Upload your Resume (PDF)", type=["pdf"])
-career_option = st.selectbox("🎯 Choose your Career Role", career_options)
+uploaded_file = st.file_uploader("📄 Upload your resume (PDF)", type="pdf")
 
-if uploaded_resume and career_option:
-    resume_text = extract_text_from_pdf(uploaded_resume)
-    all_skills_set = set(skill.lower() for sublist in career_skills.values() for skill in sublist)
-    extracted_skills = extract_skills(resume_text)
+career_option = st.selectbox("🎯 Select your career goal", list(career_skills.keys()))
 
-    # Calculate match score
-    match_score = 0
-    matched_skills = []
-    missing_skills = []
+if uploaded_file and name and career_option:
+    resume_text = extract_text_from_pdf(uploaded_file)
+    extracted_skills = extract_skills_from_text(resume_text)
 
-    if career_option in career_skills:
-        matched_skills = list(set(extracted_skills).intersection(set(career_skills[career_option])))
-        missing_skills = list(set(career_skills[career_option]).difference(set(extracted_skills)))
-        if career_skills[career_option]:
-            match_score = int(len(matched_skills) / len(career_skills[career_option]) * 100)
+    scores = []
+    for role, ideal_skills in career_skills.items():
+        ideal_skills_lower = [s.lower() for s in ideal_skills]
+        matched = set(extracted_skills) & set(ideal_skills_lower)
+        score = int(len(matched) / len(set(ideal_skills_lower)) * 100) if ideal_skills else 0
+        scores.append((role, score))
 
-    # Sort and show match scores for all roles
-    all_scores = []
-    for role, skills in career_skills.items():
-        role_matched = set(extracted_skills).intersection(set(skills))
-        score = int(len(role_matched) / len(skills) * 100) if skills else 0
-        all_scores.append((role, score))
-
-    all_scores.sort(key=lambda x: x[1], reverse=True)
-    top_roles = all_scores[:5]
+    # Sort by top matches
+    top_roles = sorted(scores, key=lambda x: x[1], reverse=True)
+    selected_score = dict(scores).get(career_option, 0)
 
     # Display results
-    st.subheader("📊 Match Results")
-    st.success(f"**Match Score for {career_option}: {match_score}%**")
-    st.markdown(f"**Matched Skills:** {', '.join(matched_skills) if matched_skills else 'None'}")
-    st.markdown(f"**Missing Skills:** {', '.join(missing_skills) if missing_skills else 'None'}")
+    st.subheader("🎓 Top Career Matches")
+    for role, score in top_roles[:5]:
+        st.write(f"🔹 {role}: {score}% match")
 
-    # Show bar chart
-    st.subheader("📈 Match Scores Across All Careers")
-    roles, scores = zip(*top_roles)
+    # Skill gap analysis
+    selected_ideal_skills = set([s.lower() for s in career_skills[career_option]])
+    extracted_skills_set = set(extracted_skills)
+    matched_skills = list(selected_ideal_skills & extracted_skills_set)
+    missing_skills = list(selected_ideal_skills - extracted_skills_set)
+
+    st.subheader(f"🧩 Skill Match for {career_option}")
+    st.write(f"✅ Matched Skills: {', '.join(matched_skills) if matched_skills else 'None'}")
+    st.write(f"❌ Missing Skills: {', '.join(missing_skills) if missing_skills else 'None'}")
+
+    # Bar chart of match scores
+    st.subheader("📊 Match Score Across All Careers")
+    roles = [r for r, _ in top_roles]
+    scores_only = [s for _, s in top_roles]
     fig, ax = plt.subplots()
-    ax.barh(roles, scores, color='skyblue')
-    ax.invert_yaxis()
+    ax.barh(roles[::-1], scores_only[::-1], color='skyblue')
     ax.set_xlabel("Match Score (%)")
-    ax.set_title("Top Career Role Matches")
+    ax.set_ylabel("Career Role")
     st.pyplot(fig)
 
-    # Generate PDF report
-    name = uploaded_resume.name.replace(".pdf", "")
-    pdf_bytes = generate_pdf_report(name, top_roles, career_option, match_score, matched_skills, missing_skills)
-    b64 = base64.b64encode(pdf_bytes).decode()
-    href = f'<a href="data:application/pdf;base64,{b64}" download="{name}_report.pdf">📥 Download PDF Report</a>'
-    st.markdown(href, unsafe_allow_html=True)
+    # Generate report
+    pdf_bytes = generate_pdf_report(name, top_roles[:5], career_option, selected_score, matched_skills, missing_skills)
+    st.download_button(label="📥 Download PDF Report", data=pdf_bytes, file_name=f"{name}_match_report.pdf", mime="application/pdf")
+
 
 
