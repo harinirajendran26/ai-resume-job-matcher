@@ -1,0 +1,4 @@
+Job_ID,Job_Title,Job_Description
+1,Data Analyst,"We are seeking a Data Analyst with experience in SQL, Python, Tableau, and Excel. The role involves KPI analysis, dashboard creation, and working closely with marketing and finance teams. Familiarity with Power BI and data reporting techniques is preferred."
+2,Machine Learning Engineer,"Join our AI team as a Machine Learning Engineer. Must have hands-on experience with Python, TensorFlow, scikit-learn, and NumPy. Responsibilities include building ML pipelines, model evaluation, data preprocessing, and integrating ML models into production systems."
+3,Data Scientist,"Looking for a Data Scientist with strong analytical and problem-solving skills. Must be proficient in Python, pandas, statistics, and EDA. Should be able to build classification and regression models, visualize data using matplotlib, and interpret results for business impact."

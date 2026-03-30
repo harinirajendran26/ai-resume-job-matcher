@@ -1,0 +1,11 @@
+{
+  "Data Analyst": ["python", "sql", "excel", "power bi", "tableau", "statistics"],
+  "Data Scientist": ["python", "machine learning", "deep learning", "statistics", "sql", "data visualization"],
+  "Machine Learning Engineer": ["python", "scikit-learn", "tensorflow", "pandas", "numpy", "algorithms"],
+  "Software Engineer": ["python", "java", "c++", "data structures", "algorithms", "git"],
+  "Product Manager": ["agile", "scrum", "communication", "roadmap", "analytics", "prioritization"],
+  "UI/UX Designer": ["figma", "wireframes", "adobe xd", "user research", "design systems"],
+  "HR Manager": ["recruitment", "onboarding", "conflict resolution", "employee relations", "payroll"],
+  "Marketing Analyst": ["seo", "google analytics", "campaigns", "branding", "market research"],
+  "Business Analyst": ["excel", "data analysis", "sql", "stakeholder management", "reporting"]
+}
