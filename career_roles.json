@@ -1,11 +1,67 @@
 {
-  "Data Analyst": ["python", "sql", "excel", "power bi", "tableau", "statistics"],
-  "Data Scientist": ["python", "machine learning", "deep learning", "statistics", "sql", "data visualization"],
-  "Machine Learning Engineer": ["python", "scikit-learn", "tensorflow", "pandas", "numpy", "algorithms"],
-  "Software Engineer": ["python", "java", "c++", "data structures", "algorithms", "git"],
-  "Product Manager": ["agile", "scrum", "communication", "roadmap", "analytics", "prioritization"],
-  "UI/UX Designer": ["figma", "wireframes", "adobe xd", "user research", "design systems"],
-  "HR Manager": ["recruitment", "onboarding", "conflict resolution", "employee relations", "payroll"],
-  "Marketing Analyst": ["seo", "google analytics", "campaigns", "branding", "market research"],
-  "Business Analyst": ["excel", "data analysis", "sql", "stakeholder management", "reporting"]
+  "Data Analyst": [
+    "python", "sql", "excel", "power bi", "tableau", "statistics",
+    "data visualization", "reporting", "pandas", "data cleaning",
+    "pivot tables", "dashboards", "business intelligence"
+  ],
+  "Data Scientist": [
+    "python", "machine learning", "deep learning", "statistics", "sql",
+    "data visualization", "pandas", "numpy", "tensorflow", "keras",
+    "scikit-learn", "feature engineering", "model evaluation", "jupyter"
+  ],
+  "Machine Learning Engineer": [
+    "python", "scikit-learn", "tensorflow", "pandas", "numpy", "algorithms",
+    "deep learning", "model deployment", "docker", "mlops", "api development",
+    "pytorch", "data preprocessing", "hyperparameter tuning", "git"
+  ],
+  "Software Engineer": [
+    "python", "java", "c++", "data structures", "algorithms", "git",
+    "system design", "api development", "testing", "agile", "docker",
+    "databases", "code review", "debugging", "rest"
+  ],
+  "Full Stack Developer": [
+    "html", "css", "javascript", "react", "node.js", "express",
+    "mongodb", "api development", "git", "github", "sql",
+    "rest", "authentication", "responsive design", "typescript"
+  ],
+  "Frontend Developer": [
+    "html", "css", "javascript", "react", "typescript", "figma",
+    "responsive design", "git", "accessibility", "performance optimization",
+    "testing", "webpack", "tailwind", "user experience"
+  ],
+  "Backend Developer": [
+    "python", "java", "node.js", "sql", "mongodb", "docker",
+    "api development", "authentication", "rest", "git", "databases",
+    "system design", "microservices", "testing", "cloud"
+  ],
+  "Product Manager": [
+    "agile", "scrum", "communication", "roadmap", "analytics",
+    "prioritization", "user research", "stakeholder management",
+    "a/b testing", "product strategy", "data analysis", "sql"
+  ],
+  "UI/UX Designer": [
+    "figma", "wireframes", "adobe xd", "user research", "design systems",
+    "prototyping", "usability testing", "typography", "adobe photoshop",
+    "user experience", "accessibility", "interaction design"
+  ],
+  "DevOps Engineer": [
+    "docker", "kubernetes", "ci/cd", "git", "linux", "cloud",
+    "aws", "terraform", "monitoring", "scripting", "python",
+    "system administration", "networking", "security"
+  ],
+  "Business Analyst": [
+    "excel", "data analysis", "sql", "stakeholder management", "reporting",
+    "requirements gathering", "process mapping", "power bi",
+    "communication", "documentation", "agile"
+  ],
+  "HR Manager": [
+    "recruitment", "onboarding", "conflict resolution", "employee relations",
+    "payroll", "hr policies", "interviewing", "compliance",
+    "communication", "performance management", "training"
+  ],
+  "Marketing Analyst": [
+    "seo", "google analytics", "campaigns", "branding", "market research",
+    "content strategy", "social media", "email marketing", "excel",
+    "data analysis", "a/b testing", "paid advertising"
+  ]
 }

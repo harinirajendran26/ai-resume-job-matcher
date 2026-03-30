@@ -1,112 +1,70 @@
-AI Resume–Career Matcher
+# 🧠 Resume Intelligence Platform
 
-A smart AI-powered web app that analyzes your resume, matches it to your ideal career path, and gives you a personalized report — all in seconds.
+An AI-powered career matching system using **Claude (Anthropic) API** for semantic skill extraction, multi-role match scoring, and streaming AI-generated 90-day learning roadmaps.
 
-🔗 **Live Demo** → [Click here to try it on Streamlit](https://harinirajendran26-ai-resume-job-matcher.streamlit.app/)
-
----
-
-Key Features
-
-✅ Upload your **resume as PDF**  
-✅ Choose from **multiple career roles** (tech + non-tech)  
-✅ Extract your skills using **spaCy NLP**  
-✅ View your **match score**, matched and missing skills  
-✅ See how you match with **all other career roles**  
-✅ Download a personalized **PDF report**  
-✅ **No login, no signup — just works!**
+🔗 **Live Demo** → [Try it on Streamlit Cloud](https://harinirajendran26-ai-resume-job-matcher.streamlit.app/)
 
 ---
 
-Demo Screenshots
+## What makes this different
 
-### 🔘 Upload Resume & Choose Role
-![Upload Resume](https://github.com/harinirajendran26/ai-resume-job-matcher/blob/main/screenshots/upload_and_select.png)
-
-### 🎯 Match Result with Skill Analysis
-![Match Score](https://github.com/harinirajendran26/ai-resume-job-matcher/blob/main/screenshots/match_results.png)
-
-### 📈 Career Match Bar Chart
-![Bar Chart](https://github.com/harinirajendran26/ai-resume-job-matcher/blob/main/screenshots/bar_chart.png)
-
-### 📥 Download Personalized PDF Report
-![PDF Report](https://github.com/harinirajendran26/ai-resume-job-matcher/blob/main/screenshots/pdf_report_button.png)
+Most resume matchers do simple keyword intersection. This uses **Claude AI for semantic understanding** — "data analysis experience" correctly matches "data analysis" even when phrased differently. It also generates a fully personalised 90-day career roadmap.
 
 ---
 
-How It Works
+## Features
 
-1. Resume is parsed using `PyPDF2`
-2. Skills are extracted with `spaCy` NLP engine
-3. Compared against curated skillsets for each career
-4. Displays match % + missing skills + suggestions
-5. Offers a PDF report of your results
-
----
-
-Career Roles Supported
-
-Includes both technical and non-technical roles:
-
-- Data Analyst  
-- Data Scientist  
-- Machine Learning Engineer  
-- Software Engineer  
-- Product Manager  
-- UI/UX Designer  
-- HR Manager  
-- Business Analyst  
-- Marketing Analyst  
+| Feature | Technology |
+|---|---|
+| Semantic skill extraction | Claude (Anthropic) API |
+| PDF resume parsing | PyPDF2 |
+| Match scoring across 13 career roles | Custom scoring engine |
+| Radar chart + bar chart | Matplotlib |
+| Streaming AI roadmap | Claude streaming API |
+| Cross-role transferable skill detection | Python Counter |
+| PDF report download | FPDF |
 
 ---
 
-Tech Stack
+## Architecture
 
-- Python
-- Streamlit (frontend)
-- spaCy (skill extraction)
-- PyPDF2 (PDF reader)
-- Matplotlib (visualizations)
-- FPDF (report generation)
+```
+Resume (PDF / text)
+        │
+        ▼
+Claude API — semantic skill extraction
+        │
+        ▼
+Match engine — scores all 13 roles
+        │
+        ├── Match analysis (radar + bar charts)
+        ├── Skill gap breakdown
+        ├── Cross-role comparison
+        └── Claude streaming — 90-day roadmap → PDF export
+```
 
 ---
 
-💻 Run It Locally
+## Tech Stack
+
+Python · Streamlit · Anthropic Claude API · PyPDF2 · Matplotlib · FPDF · Pandas
+
+---
+
+## 13 Career Roles Supported
+
+Data Analyst · Data Scientist · Machine Learning Engineer · Software Engineer · Full Stack Developer · Frontend Developer · Backend Developer · Product Manager · UI/UX Designer · DevOps Engineer · Business Analyst · HR Manager · Marketing Analyst
+
+---
+
+## Run locally
 
 ```bash
 git clone https://github.com/harinirajendran26/ai-resume-job-matcher.git
 cd ai-resume-job-matcher
 pip install -r requirements.txt
 streamlit run app.py
-----
-
-What I Learned
-
-This wasn’t just a technical project. It taught me:
-- How to use **NLP to extract real meaning from text**
-- How to simulate **real-world job matching logic**
-- That **visual storytelling** can make or break a good idea
 
 ---
 
-Use Case
-
-This tool could help:
-- ✅ Job seekers understand what skills they lack
-- ✅ Recruiters shortlist the right candidates faster
-- ✅ Career counselors give tailored advice
-
----
-
-Resume Description You Can Use
-
-> Built an AI-powered resume–job matching system using NLP, match scoring, and data visualization. Extracted skills from unstructured text, identified best-fit roles, and highlighted missing skills for career improvement.
-
----
-
-Made by Harini Rajendran
-
-Third-year Artificial Intelligence Engineering student with a love for projects that *solve real problems*.  
-Always open to opportunities in AI, data, or product thinking.  
-Let’s build something meaningful.
-
+Made by - Harini Rajendran (B.E in Artificial Intelligence and Machine Learning)
